@@ -728,7 +728,6 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 		end
 		function ContainerContent:Toggle(text, desc,default, callback)
-            local ToggleFunc = {}
 			local ToggleDescToggled = false
 			local Toggled = false
 			if desc == "" then
@@ -857,10 +856,6 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			ArrowIco.Image = "http://www.roblox.com/asset/?id=6034818372"
 			ArrowIco.ImageTransparency = .3
 			
-            function ToggleFunc:Set(Input)
-                Toggled = Input
-            end
-
 		    Toggle.MouseEnter:Connect(function()
 				TweenService:Create(
 					Title,
@@ -1000,7 +995,6 @@ function Flux:Window(text, bottom,mainclr,toclose)
 				pcall(callback, Toggled)
 			end
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
-            return ToggleFunc
 		end
 		
 		function ContainerContent:Slider(text,desc,min,max,start,callback)
