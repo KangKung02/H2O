@@ -728,7 +728,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 		end
 		function ContainerContent:Toggle(text, desc,default, callback)
-            local ReturningValue = {}
+            local ToggleFunc = {}
 			local ToggleDescToggled = false
 			local Toggled = false
 			if desc == "" then
@@ -857,6 +857,10 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			ArrowIco.Image = "http://www.roblox.com/asset/?id=6034818372"
 			ArrowIco.ImageTransparency = .3
 			
+            function ToggleFunc:Set(Input)
+                Toggled = Input
+            end
+
 		    Toggle.MouseEnter:Connect(function()
 				TweenService:Create(
 					Title,
@@ -995,21 +999,8 @@ function Flux:Window(text, bottom,mainclr,toclose)
 				Toggled = not Toggled
 				pcall(callback, Toggled)
 			end
-            spawn(function()
-                if ReturningValue.a then
-                    print('Work!')
-					ToggleCircle:TweenPosition(UDim2.new(0, 0,-0.273, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .3, true)
-					TweenService:Create(
-						ToggleCircle,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{BackgroundColor3 = Color3.fromRGB(255,255,255)}
-					):Play()
-                    Toggled = not Toggled
-                    pcall(callback, Toggled)    
-                end
-            end)
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
-            return ReturningValue
+            return ToggleFunc
 		end
 		
 		function ContainerContent:Slider(text,desc,min,max,start,callback)
