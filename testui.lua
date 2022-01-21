@@ -1316,6 +1316,7 @@ function Flux:Window()
 			return SliderFunc
 		end
 		function ContainerContent:Dropdown(text,list,callback)
+			table.foreach(list, print)
 			local DropFunc = {}
 			local Selected = text
 			local FrameSize = 43
